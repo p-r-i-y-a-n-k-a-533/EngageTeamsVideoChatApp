@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engage Teams</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script>
+      const Room_Id = "<%= roomId %>";
+    </script>
+  </head>
+  <body>
+    <div class="header">
+        <h3>Engage Teams</h3>
+    </div>  
+    <div class="main_frame">  
+    <div class="left_frame">
+      <div class="video_frame">
+        <div id="video-box">
+        </div>
+      </div>
+      <div class="control_options">
+        <div class="leftside_options">
+          <div id="video_button" class="options_button">
+            <i class="fa fa-video-camera"></i>
+          </div>
+          <div id="mic_button" class="options_button">
+            <i class="fa fa-microphone"></i>
+          </div>
+        </div>
+        <div class="rightside_options">
+          <div id="busy_button" class="options_button">
+            <i class="fa fa-desktop"></i>
+          </div>
+          <div id="invite_button" class="options_button">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <div id="leave_button" class="options_button">
+            <i class="fas fa-phone"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right_frame">
+      <div class="chat_frame">
+          <div class="chat_header">Meeting Chat</div>
+          <div class="sent_messages_box">
+          </div>
+      </div>
+      <div class="type_message_box">
+        <input id="type_here_box" type="text" autocomplete="off" placeholder="Type message here...">
+        <div id="send_button" class="options_button">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  <script src="script.js"></script>
+</html>
