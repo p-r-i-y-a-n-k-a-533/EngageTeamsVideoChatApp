@@ -1,3 +1,5 @@
+//priyankakushwaha533@gmail.com
+
 var socket = io("/");
 const videoBox = document.getElementById("video-box");
 const myVideo = document.createElement("video");
@@ -38,9 +40,7 @@ navigator.mediaDevices
       const video = document.createElement("video");
       call.on("stream", (user_videoStream) => {
         add_videoStream(video, user_videoStream);
-        //
         currentPeer = call.peerConnection
-        //
       });
     });
 
@@ -53,7 +53,33 @@ navigator.mediaDevices
       })
       
     });
-  
+
+////////////////////////////////////////////////////////////////////////////////
+
+peer.on("open", (id) => {
+  socket.emit("join-room", Room_Id, id, user);
+});
+
+///////////////////////////////////////////////////////////////////////////////
+
+socket.on('user-disconnected', userId => {
+  if (peersConnected[userId]) 
+  peersConnected[userId].close()
+});
+
+///////////////////////////////////////////////////////////////////////////////
+
+socket.on("createMessage", (message, userName) => {
+  sentMessages.innerHTML =
+  sentMessages.innerHTML+
+    `<div class="message">
+        <b><i class="far fa-user-circle"></i> <span> ${
+          userName === user ? "me" : userName
+        }</span> </b>
+        <span>${message}</span>
+    </div>`;
+});
+
 //////////////////////////////////////////////////////////////////////////////
 
 const connect_NewUser = (userId, stream) => {
@@ -68,12 +94,6 @@ const connect_NewUser = (userId, stream) => {
   })
   peersConnected[userId] = call
 };
-
-///////////////////////////////////////////////////////////////////////////////
-
-peer.on("open", (id) => {
-  socket.emit("join-room", Room_Id, id, user);
-});
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -213,16 +233,7 @@ leaveButton.addEventListener("click",() => {
 });
 
 
-/////////////////////////////////////////////////////////////////////////////
 
-socket.on("createMessage", (message, userName) => {
-  sentMessages.innerHTML =
-  sentMessages.innerHTML+
-    `<div class="message">
-        <b><i class="far fa-user-circle"></i> <span> ${
-          userName === user ? "me" : userName
-        }</span> </b>
-        <span>${message}</span>
-    </div>`;
-});
+
+
 
