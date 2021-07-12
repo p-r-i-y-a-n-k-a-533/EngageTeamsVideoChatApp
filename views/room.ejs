@@ -14,10 +14,12 @@
   </head>
   <body>
     <div class="header">
-        <h3>Engage Teams</h3>
+        <h3>Engage Teams
+        </h3>&nbsp&nbsp
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"width="36" height="36" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M71.66667,114.66667h28.66667v28.66667h-28.66667z" fill="#666666"></path><path d="M14.33333,32.25h143.33333v96.75h-143.33333z" fill="#34495e"></path><path d="M21.5,39.41667h129v82.41667h-129z" fill="#cccccc"></path><path d="M53.75,139.75h64.5v7.16667h-64.5z" fill="#34495e"></path><path d="M60.91667,111.08333h50.16667v-0.04658c0,-11.8465 -9.60692,-21.45342 -21.45342,-21.45342h-7.25625c-11.85008,0 -21.457,9.60692 -21.457,21.45342z" fill="#e74c3c"></path><path d="M93.17025,82.41667h-14.33333v10.75c0,0 1.17533,3.58333 7.01975,3.58333c5.84442,0 7.31358,-3.58333 7.31358,-3.58333zM98.54167,68.08333c-2.96853,0 -5.375,2.40647 -5.375,5.375c0,2.96853 2.40647,5.375 5.375,5.375c2.96853,0 5.375,-2.40647 5.375,-5.375c0,-2.96853 -2.40647,-5.375 -5.375,-5.375zM73.45833,68.08333c-2.96853,0 -5.375,2.40647 -5.375,5.375c0,2.96853 2.40647,5.375 5.375,5.375c2.96853,0 5.375,-2.40647 5.375,-5.375c0,-2.96853 -2.40647,-5.375 -5.375,-5.375z" fill="#ff9800"></path><path d="M100.33333,61.69067c0,-7.90483 -6.4285,-7.94067 -14.33333,-7.94067c-7.90483,0 -14.33333,0.03583 -14.33333,7.94067c0,1.24342 0,12.31233 0,13.55933c0,7.90483 6.4285,14.33333 14.33333,14.33333c7.90483,0 14.33333,-6.4285 14.33333,-14.33333c0,-1.24342 0,-12.31233 0,-13.55933z" fill="#ffb74d"></path><path d="M85.21525,46.58333c-8.73258,0.78475 -17.13192,6.91583 -17.13192,19.9735v5.10983l3.58333,3.58333v-10.75l22.61083,-7.88692l6.05583,7.88692v10.75l3.58333,-3.58333v-4.31075c0,-8.65017 -0.48375,-15.06792 -10.75,-17.18925l-1.73792,-3.58333z" fill="#424242"></path><path d="M60.91667,103.91667h21.5v14.33333h-21.5zM89.58333,103.91667h21.5v14.33333h-21.5zM32.25,103.91667h21.5v14.33333h-21.5zM118.25,103.91667h21.5v14.33333h-21.5z" fill="#3f51b5"></path></g></g></svg>
     </div>  
     <div class="main_frame">  
-    <div class="left_frame">
+    <div id="r" class="left_frame">
       <div class="video_frame">
         <div id="video-box">
         </div>
@@ -32,32 +34,34 @@
           </div>
         </div>
         <div class="rightside_options">
-          <div id="busy_button" class="options_button">
+          <div id="screenshare_button" class="options_button">
             <i class="fa fa-desktop"></i>
           </div>
           <div id="invite_button" class="options_button">
             <i class="fas fa-user-plus"></i>
           </div>
-          <div id="leave_button" class="options_button">
-            <i class="fas fa-phone"></i>
-          </div>
+          <form>
+            <button id="leave_button"  class="options_button last_page">
+              <i class="fas fa-phone"></i>
+            </button>
+          </form>
         </div>
       </div>
     </div>
-    <div class="right_frame">
+    <div class="right_frame" id="chat">
       <div class="chat_frame">
-          <div class="chat_header">Meeting Chat</div>
+          <div class="chat_header">Meeting Chat <i class="fa fa-comments-o" aria-hidden="true"></i></div>
           <div class="sent_messages_box">
           </div>
       </div>
       <div class="type_message_box">
         <input id="type_here_box" type="text" autocomplete="off" placeholder="Type message here...">
         <div id="send_button" class="options_button">
-          <i class="fa fa-plus" aria-hidden="true"></i>
+          <i class="fa fa-send" aria-hidden="true"></i>
         </div>
       </div>
     </div>
   </div>
   </body>
-  <script src="script.js"></script>
+  <script  src="script.js"></script>
 </html>

@@ -31,12 +31,17 @@ app.use(express.static("public"));
 app.get("/",function(req,res)
 {
   res.sendFile(__dirname+"/views/index.html");
+  
 });
 
 ////////////////////////////////////////////////////////////////////////////
 
-app.get("/:room", (req, res) => {
+app.get("/room", (req, res) => {
   res.render("room", { roomId: req.params.room });
+});
+
+app.post("/:room", (req, res) => {
+  res.render("room", { roomId: req.params.room});
 });
 
 ////////////////////////////////////////////////////////////////////////////
@@ -60,9 +65,8 @@ app.post("/",function(req,res)
                     auth:"pr1:8f71e0a6f1a402f8333273a965d6b86d-us10"
                   }
   const request = https.request(url,options,function(response)
-  {  if(res.statusCode === 200)
-      { //res.sendFile(__dirname+"/views/room.ejs");
-        res.render("room", { roomId: req.params.room });}
+  {  
+        res.render("room", { roomId: req.params.room });
   }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -75,6 +79,7 @@ app.post("/",function(req,res)
   request.end();
 
 });
+
 
 ///////////////////////////////////////////////////////////////////////////
 

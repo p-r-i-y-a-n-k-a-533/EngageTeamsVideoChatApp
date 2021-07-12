@@ -81,7 +81,7 @@ video {
   align-items: center;
   background-color: var(--primary-color);
   height: 50px;
-  border-radius: 5px;
+  border-radius: 100px;
   color: var(--main-light);
   font-size: 1.2rem;
   width: 50px;
@@ -135,6 +135,9 @@ video {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  bottom: 10px;
+  width: 28%;
 }
 
 .type_message_box > input {
@@ -201,3 +204,5 @@ video {
 .last_page{
   background-color: #f6484a;
 }
+
+

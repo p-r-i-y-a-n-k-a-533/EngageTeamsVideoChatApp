@@ -1,4 +1,4 @@
-const socket = io("/");
+var socket = io("/");
 const videoBox = document.getElementById("video-box");
 const myVideo = document.createElement("video");
 let textMessage = document.querySelector("#type_here_box");
@@ -8,15 +8,15 @@ const inviteButton = document.querySelector("#invite_button");
 const micButton = document.querySelector("#mic_button");
 const videoButton = document.querySelector("#video_button");
 const leaveButton = document.querySelector("#leave_button");
-const busyButton = document.querySelector('#busy_button');
+const screenShareButton = document.querySelector('#screenshare_button');
 const video = document.getElementsByTagName('video');
+
+///////////////////////////////////////////////////////////////////////////////////
 
 myVideo.muted = true;
 const peersConnected = {}
 const user = prompt("Enter your name for this meet");
-//
 var currentPeer;
-//
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
@@ -49,7 +49,7 @@ navigator.mediaDevices
     socket.on("user-connected", (userId) => {
       setTimeout(()=>{
         connect_NewUser(userId, stream)
-      },3000)
+      },50)
       })
       
     });
@@ -61,9 +61,7 @@ const connect_NewUser = (userId, stream) => {
   const video = document.createElement("video");
   call.on("stream", (user_videoStream) => {
     add_videoStream(video, user_videoStream);
-    //
     currentPeer=call.peerConnection
-    //
   });
   call.on('close',() => {
     video.remove()
@@ -97,7 +95,7 @@ sendButton.addEventListener("click", (e) => {
   }
 });
 
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 textMessage.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && textMessage.value.length !== 0) {
@@ -106,7 +104,7 @@ textMessage.addEventListener("keydown", (e) => {
   }
 });
 
-/////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 micButton.addEventListener("click", () => {
   const enabled = my_videoStream.getAudioTracks()[0].enabled;
@@ -123,7 +121,7 @@ micButton.addEventListener("click", () => {
   }
 });
 
-///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 videoButton.addEventListener("click", () => {
   const enabled = my_videoStream.getVideoTracks()[0].enabled;
@@ -141,13 +139,10 @@ videoButton.addEventListener("click", () => {
   }
 });
 
-//////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-busyButton.addEventListener("click", () => {
-  busyButton.classList.toggle("background__orange");
-   {
-     
-    
+screenShareButton.addEventListener("click", () => {
+  screenShareButton.classList.add("background__orange");
          navigator.mediaDevices.getDisplayMedia( {
             video: {
                 cursor: "none"
@@ -167,13 +162,25 @@ busyButton.addEventListener("click", () => {
           })
           sender.replaceTrack(videoTrack)
         }).catch((err)=>{
-             console.log("------------------"+err)
+             console.log("--------error----------"+err)
         })
-    }
-    
-   
-
   });
+
+////////////////////////////////////////////////////////////////////////////
+
+  myVideo.addEventListener("dblclick",function(){
+    if(myVideo.requestFullScreen){
+      myVideo.requestFullScreen();
+    } 
+    else if(myVideo.webkitRequestFullScreen){
+      myVideo.webkitRequestFullScreen();
+    } 
+    else if(myVideo.mozRequestFullScreen){
+      myVideo.mozRequestFullScreen();
+    }
+  })
+
+//////////////////////////////////////////////////////////////////////////////
 
   function stopScreenShare(){
     let videoTrack = my_videoStream.getVideoTracks()[0];
@@ -181,7 +188,7 @@ busyButton.addEventListener("click", () => {
       return s.track.kind == videoTrack.kind;
     })  
     sender.replaceTrack(videoTrack)
-    busyButton.classList.toggle("background__orange");
+    screenShareButton.classList.remove("background__orange");
   }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -194,13 +201,17 @@ inviteButton.addEventListener("click", (e) => {
 });
 
 /////////////////////////////////////////////////////////////////////////////
-
+ 
 leaveButton.addEventListener("click",() => {
-  const enabled = my_videoStream.getVideoTracks()[0].enabled;
-  if (enabled) {
-    my_videoStream.getVideoTracks()[0].enabled = false;}
-  document.getElementsByTagName ('html') [0] .remove ();
+  navigator.mediaDevices.getUserMedia({video: true, audio: false})
+  .then(mediaStream => {
+    const stream = mediaStream;
+    const tracks = stream.getTracks();
+    tracks[0].stop;
+  })
+  
 });
+
 
 /////////////////////////////////////////////////////////////////////////////
 
